@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ReviewMapper {
-
+    private ReviewMapper() {    }
     public static ReviewDto mapToDto(Review review) {
         ReviewDto dto = new ReviewDto();
         dto.setId(review.getId());

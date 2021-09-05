@@ -12,8 +12,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class ReviewMapperUnitTest extends AbstractTestClass {
 
-    private final ReviewMapper mapper = new ReviewMapper();
-
     @Test
     void mapToDtoTest() {
         ReviewDto testDto = ReviewMapper.mapToDto(createTestReview());

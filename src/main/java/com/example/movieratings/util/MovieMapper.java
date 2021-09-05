@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MovieMapper {
+    private MovieMapper() { }
 
     public static MovieDto mapToDto(Movie movie) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");

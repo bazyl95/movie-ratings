@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MovieController {
 
     private final MovieService movieService;
+    private static final String CONTENT_FRAGMENT = "content";
 
     @Autowired
     MovieController(MovieService movieService) {
@@ -24,23 +25,23 @@ public class MovieController {
     @GetMapping
     public String returnAllMovies(Model model) {
         model.addAttribute("movies", movieService.findAllMovies());
-        model.addAttribute("content", "movies");
+        model.addAttribute(CONTENT_FRAGMENT, "movies");
         return "main";
     }
 
     @GetMapping("/{id}")
-    public String getIndex(@PathVariable Long id, Model model) {
+    public String browseMovie(@PathVariable Long id, Model model) {
         model.addAttribute("movie", movieService.findMovieById(id));
         model.addAttribute("newReview", new ReviewDto());
-        model.addAttribute("content", "browseMovie");
+        model.addAttribute(CONTENT_FRAGMENT, "browseMovie");
         return "main";
     }
 
     @GetMapping("/search")
-    public String getIndex(@RequestParam String name, Model model) {
+    public String searchMovies(@RequestParam String name, Model model) {
         model.addAttribute("movies", movieService.findAllMoviesByName(name));
         model.addAttribute("name", name);
-        model.addAttribute("content", "searchMovies");
+        model.addAttribute(CONTENT_FRAGMENT, "searchMovies");
         return "main";
     }
 }
