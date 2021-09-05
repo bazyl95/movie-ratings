@@ -24,7 +24,7 @@ class MovieRepositoryIntegrationTests {
     void findOneByIdMovieRepositorySuccessfulTest() {
         Optional<Movie> foundMovie = movieRepository.findOneById(1L);
 
-        assertThat(foundMovie.isPresent()).isTrue();
+        assertThat(foundMovie).isPresent();
         assertThat(foundMovie.get().getId()).isEqualTo(1L);
         assertThat(foundMovie.get().getName()).isEqualTo("Lords of the Rings");
         assertThat(foundMovie.get().getDirector()).isEqualTo("Peter Jackson");
@@ -35,7 +35,7 @@ class MovieRepositoryIntegrationTests {
     void findOneByIdMovieRepositoryNotFoundTest() {
         Optional<Movie> foundMovie = movieRepository.findOneById(1000L);
 
-        assertThat(foundMovie.isPresent()).isFalse();
+        assertThat(foundMovie).isNotPresent();
     }
 
     @Test

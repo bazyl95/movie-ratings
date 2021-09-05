@@ -8,22 +8,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MovieMapper {
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-    private final ReviewMapper mapper = new ReviewMapper();
 
-    public MovieDto mapToDto(Movie movie) {
+    public static MovieDto mapToDto(Movie movie) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         MovieDto dto = new MovieDto();
         dto.setId(movie.getId());
         dto.setName(movie.getName());
         dto.setDirector(movie.getDirector());
         dto.setReleaseDate(dateFormat.format(movie.getReleaseDate()));
-        dto.setReviews(mapper.mapToDtoList(movie.getReviews()));
+        dto.setReviews(ReviewMapper.mapToDtoList(movie.getReviews()));
         return dto;
     }
 
-    public List<MovieDto> mapToDtoList(List<Movie> movies) {
+    public static List<MovieDto> mapToDtoList(List<Movie> movies) {
         return movies.stream()
-                .map(this::mapToDto)
+                .map(MovieMapper::mapToDto)
                 .collect(Collectors.toList());
     }
 }

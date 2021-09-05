@@ -14,7 +14,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-public class ReviewRepositoryIntegrationTests {
+class ReviewRepositoryIntegrationTests {
 
     @Autowired
     ReviewRepository reviewRepository;
@@ -30,7 +30,7 @@ public class ReviewRepositoryIntegrationTests {
         testReview.setMovie(testMovie);
         reviewRepository.save(testReview);
         Optional<Review> foundReview = reviewRepository.findById(1L);
-        assertThat(foundReview.isPresent()).isTrue();
+        assertThat(foundReview).isPresent();
         assertThat(foundReview.get().getMark()).isEqualTo(5);
         assertThat(foundReview.get().getText()).isEqualTo("test review");
     }
@@ -38,6 +38,6 @@ public class ReviewRepositoryIntegrationTests {
     @Test
     void findByIdReviewRepositoryNotFoundTest() {
         Optional<Review> foundReview = reviewRepository.findById(1000L);
-        assertThat(foundReview.isPresent()).isFalse();
+        assertThat(foundReview).isNotPresent();
     }
 }

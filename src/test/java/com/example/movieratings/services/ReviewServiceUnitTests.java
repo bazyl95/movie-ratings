@@ -14,7 +14,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
 
-public class ReviewServiceUnitTests extends AbstractTestClass {
+class ReviewServiceUnitTests extends AbstractTestClass {
 
     @Mock
     MovieRepository movieRepository;
