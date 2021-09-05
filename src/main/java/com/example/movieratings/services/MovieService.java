@@ -1,0 +1,33 @@
+package com.example.movieratings.services;
+
+import com.example.movieratings.dto.MovieDto;
+import com.example.movieratings.repositories.MovieRepository;
+import com.example.movieratings.util.MovieMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class MovieService {
+
+    MovieRepository movieRepository;
+
+    @Autowired
+    MovieService(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
+    }
+
+    public MovieDto findMovieById(Long id) {
+        return MovieMapper.mapToDto(movieRepository.findOneById(id)
+                .orElseThrow(() -> new IllegalArgumentException("No movie with id " + id)));
+    }
+
+    public List<MovieDto> findAllMovies() {
+        return MovieMapper.mapToDtoList(movieRepository.findAll());
+    }
+
+    public List<MovieDto> findAllMoviesByName(String name) {
+        return MovieMapper.mapToDtoList(movieRepository.findByNameContainingIgnoreCase(name));
+    }
+}
