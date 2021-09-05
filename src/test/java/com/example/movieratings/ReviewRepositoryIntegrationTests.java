@@ -20,8 +20,8 @@ public class ReviewRepositoryIntegrationTests {
     ReviewRepository reviewRepository;
 
 
-    @BeforeEach
-    void persistReview() {
+    @Test
+    void findByIdReviewRepositorySuccessfulTest() {
         Review testReview = new Review();
         testReview.setText("test review");
         testReview.setMark(5);
@@ -29,15 +29,6 @@ public class ReviewRepositoryIntegrationTests {
         testMovie.setId(1L);
         testReview.setMovie(testMovie);
         reviewRepository.save(testReview);
-    }
-
-    @AfterEach
-    void deleteReview() {
-        reviewRepository.deleteById(1L);
-    }
-
-    @Test
-    void findByIdReviewRepositorySuccessfulTest() {
         Optional<Review> foundReview = reviewRepository.findById(1L);
         assertThat(foundReview.isPresent()).isTrue();
         assertThat(foundReview.get().getMark()).isEqualTo(5);
