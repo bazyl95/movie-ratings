@@ -1,23 +1,23 @@
 package com.example.movieratings.controllers;
 
 import com.example.movieratings.dto.ReviewDto;
-import com.example.movieratings.services.MovieService;
 import com.example.movieratings.services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequestMapping("/review")
 public class ReviewController {
 
-    private final MovieService movieService;
     private final ReviewService reviewService;
 
     @Autowired
-    public ReviewController(MovieService movieService, ReviewService reviewService) {
-        this.movieService = movieService;
+    public ReviewController(ReviewService reviewService) {
         this.reviewService = reviewService;
     }
 

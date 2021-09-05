@@ -1,6 +1,7 @@
 package com.example.movieratings.services;
 
 import com.example.movieratings.dto.MovieDto;
+import com.example.movieratings.exceptions.MovieNotFoundException;
 import com.example.movieratings.repositories.MovieRepository;
 import com.example.movieratings.util.MovieMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class MovieService {
 
     public MovieDto findMovieById(Long id) {
         return MovieMapper.mapToDto(movieRepository.findOneById(id)
-                .orElseThrow(() -> new IllegalArgumentException("No movie with id " + id)));
+                .orElseThrow(() -> new MovieNotFoundException(id.toString())));
     }
 
     public List<MovieDto> findAllMovies() {

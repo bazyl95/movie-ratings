@@ -1,7 +1,7 @@
 package com.example.movieratings.util;
 
-import com.example.movieratings.dao.Review;
 import com.example.movieratings.dto.ReviewDto;
+import com.example.movieratings.model.Review;
 
 import java.util.List;
 import java.util.stream.Collectors;

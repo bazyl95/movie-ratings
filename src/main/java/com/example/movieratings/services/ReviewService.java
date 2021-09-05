@@ -1,8 +1,9 @@
 package com.example.movieratings.services;
 
-import com.example.movieratings.dao.Movie;
-import com.example.movieratings.dao.Review;
 import com.example.movieratings.dto.ReviewDto;
+import com.example.movieratings.exceptions.MovieNotFoundException;
+import com.example.movieratings.model.Movie;
+import com.example.movieratings.model.Review;
 import com.example.movieratings.repositories.MovieRepository;
 import com.example.movieratings.repositories.ReviewRepository;
 import com.example.movieratings.util.ReviewMapper;
@@ -30,12 +31,8 @@ public class ReviewService {
     public void createNewReview(ReviewDto dto, Long movieId) {
         Review reviewToSave = ReviewMapper.mapToReview(dto);
         Movie movie = movieRepository.findOneById(movieId)
-                .orElseThrow(() -> new IllegalArgumentException("There isn't movie with id: " + movieId));
+                .orElseThrow(() -> new MovieNotFoundException(movieId.toString()));
         reviewToSave.setMovie(movie);
         reviewRepository.save(reviewToSave);
-//        Movie movie = movieRepository.findOneById(movieId)
-//                .orElseThrow(() -> new IllegalArgumentException("There isn't movie with id: " + movieId));
-//        movie.getReviews().add(ReviewMapper.mapToReview(dto));
-//        movieRepository.save(movie);
     }
 }

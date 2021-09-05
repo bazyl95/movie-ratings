@@ -1,4 +1,4 @@
-package com.example.movieratings.dao;
+package com.example.movieratings.model;
 
 import lombok.Data;
 
