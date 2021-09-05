@@ -1,8 +1,5 @@
 package com.example.movieratings.services;
 
-import com.example.movieratings.dto.ReviewDto;
-import com.example.movieratings.model.Movie;
-import com.example.movieratings.model.Review;
 import com.example.movieratings.repositories.MovieRepository;
 import com.example.movieratings.repositories.ReviewRepository;
 import org.junit.jupiter.api.Test;
