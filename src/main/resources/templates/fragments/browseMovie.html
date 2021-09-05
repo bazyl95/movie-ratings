@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="row" th:fragment="content">
+    <h1 th:text="${movie.name}">Heading</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Director</th>
+            <th scope="col">Release date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${movie.name}"/>
+            <td th:text="${movie.director}"/>
+            <td th:text="${movie.releaseDate}"/>
+        </tr>
+        </tbody>
+    </table>
+    <h2 th:text="'Reviews for the movie'">Reviews title</h2>
+    <div class="row">
+        <div class="col-9">
+            <p>
+                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseForm" role="button" aria-expanded="false" aria-controls="collapseForm">
+                    Add review
+                </a>
+            </p>
+            <div class="collapse" id="collapseForm">
+                <form method="POST" th:action="@{/review/{movieId}(movieId=${movie.id})}" th:object="${newReview}">
+
+                    <select class="form-select" aria-label="Mark for review" name="mark" th:field="*{mark}">
+                        <option th:value="1">1</option>
+                        <option th:value="2">2</option>
+                        <option th:value="3">3</option>
+                        <option th:value="4">4</option>
+                        <option th:value="5">5</option>
+                        <option th:value="6">6</option>
+                        <option th:value="7">7</option>
+                        <option th:value="8">8</option>
+                        <option th:value="9">9</option>
+                        <option th:value="10">10</option>
+                    </select>
+                    <div class="mb-3">
+                        <label for="text" class="form-label">Review text</label>
+                        <input type="text" name="text" class="form-control" id="text" th:field="*{text}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card m-2" style="width: 18rem;" th:each="review : ${movie.reviews}">
+        <div class="card-body">
+            <h5 class="card-title" th:text="|Mark: ${review.mark}|">Review title</h5>
+            <p class="card-text" th:text="${review.text}">Example text</p>
+            <form method="POST" th:action="@{/review/{movieId}/delete/{id}(movieId=${movie.id}, id=${review.id})}">
+                <button class="btn btn-primary" type="submit" th:text="'Delete review'"/>
+            </form>
+        </div>
+    </div>
+</div>
+</html>
