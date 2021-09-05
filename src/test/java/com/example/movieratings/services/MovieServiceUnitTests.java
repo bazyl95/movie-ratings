@@ -1,45 +1,26 @@
 package com.example.movieratings.services;
 
 import com.example.movieratings.dto.MovieDto;
-import com.example.movieratings.model.Movie;
 import com.example.movieratings.repositories.MovieRepository;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
-public class MovieServiceUnitTests {
+public class MovieServiceUnitTests extends AbstractTestClass {
 
     @Mock
     MovieRepository repository;
     @InjectMocks
     MovieService service;
 
-    private Movie createTestMovie() {
-        Movie testMovie = new Movie();
-        testMovie.setId(1L);
-        testMovie.setName("Test movie name");
-        testMovie.setDirector("Test director");
-        testMovie.setReleaseDate(new Date());
-        testMovie.setReviews(new ArrayList<>());
-        return testMovie;
-    }
-
-    private List<Movie> createTestMovies() {
-        Movie testMovie1 = createTestMovie();
-        Movie testMovie2 = createTestMovie();
-        testMovie2.setId(2L);
-
-        return Arrays.asList(testMovie1, testMovie2);
-    }
 
     @Test
     void findMovieByIdSuccessfulResultTest() {
