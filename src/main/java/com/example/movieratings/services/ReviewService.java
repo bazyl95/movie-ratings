@@ -15,11 +15,13 @@ public class ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final MovieRepository movieRepository;
+    private final ReviewMapper mapper;
 
     @Autowired
     public ReviewService(ReviewRepository reviewRepository, MovieRepository movieRepository) {
         this.reviewRepository = reviewRepository;
         this.movieRepository = movieRepository;
+        mapper = new ReviewMapper();
     }
 
     public void deleteReview(Long reviewId) {
@@ -29,7 +31,7 @@ public class ReviewService {
     }
 
     public void createNewReview(ReviewDto dto, Long movieId) {
-        Review reviewToSave = ReviewMapper.mapToReview(dto);
+        Review reviewToSave = mapper.mapToReview(dto);
         Movie movie = movieRepository.findOneById(movieId)
                 .orElseThrow(() -> new MovieNotFoundException(movieId.toString()));
         reviewToSave.setMovie(movie);

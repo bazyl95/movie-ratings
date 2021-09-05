@@ -12,9 +12,11 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class ReviewMapperUnitTest extends AbstractTestClass {
 
+    private final ReviewMapper mapper = new ReviewMapper();
+
     @Test
     void mapToDtoTest() {
-        ReviewDto testDto = ReviewMapper.mapToDto(createTestReview());
+        ReviewDto testDto = mapper.mapToDto(createTestReview());
         assertThat(testDto.getId()).isEqualTo(1L);
         assertThat(testDto.getText()).isEqualTo("Test text");
         assertThat(testDto.getMark()).isEqualTo(10);
@@ -23,7 +25,7 @@ public class ReviewMapperUnitTest extends AbstractTestClass {
     @Test
     void mapToDtoListTest() {
         List<Review> testReviews = Arrays.asList(createTestReview(), createTestReview());
-        List<ReviewDto> testDto = ReviewMapper.mapToDtoList(testReviews);
+        List<ReviewDto> testDto = mapper.mapToDtoList(testReviews);
         assertThat(testDto).isNotNull();
         assertThat(testDto.size()).isEqualTo(2);
         assertThat(testDto.get(0).getId()).isEqualTo(1L);
@@ -33,7 +35,7 @@ public class ReviewMapperUnitTest extends AbstractTestClass {
 
     @Test
     void mapToReviewTest() {
-        Review testReview = ReviewMapper.mapToReview(createReviewDto());
+        Review testReview = mapper.mapToReview(createReviewDto());
         assertThat(testReview.getId()).isNull();
         assertThat(testReview.getText()).isEqualTo("Some test text");
         assertThat(testReview.getMark()).isEqualTo(10);

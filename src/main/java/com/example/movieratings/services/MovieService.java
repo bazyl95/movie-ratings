@@ -12,23 +12,25 @@ import java.util.List;
 @Service
 public class MovieService {
 
-    MovieRepository movieRepository;
+    private final MovieRepository movieRepository;
+    private final MovieMapper mapper;
 
     @Autowired
     MovieService(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
+        mapper = new MovieMapper();
     }
 
     public MovieDto findMovieById(Long id) {
-        return MovieMapper.mapToDto(movieRepository.findOneById(id)
+        return mapper.mapToDto(movieRepository.findOneById(id)
                 .orElseThrow(() -> new MovieNotFoundException(id.toString())));
     }
 
     public List<MovieDto> findAllMovies() {
-        return MovieMapper.mapToDtoList(movieRepository.findAll());
+        return mapper.mapToDtoList(movieRepository.findAll());
     }
 
     public List<MovieDto> findAllMoviesByName(String name) {
-        return MovieMapper.mapToDtoList(movieRepository.findByNameContainingIgnoreCase(name));
+        return mapper.mapToDtoList(movieRepository.findByNameContainingIgnoreCase(name));
     }
 }

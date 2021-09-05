@@ -10,9 +10,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MovieMapperUnitTest extends AbstractTestClass {
 
+    private MovieMapper mapper = new MovieMapper();
+
     @Test
     void mapToDtoTest() {
-        MovieDto testDto = MovieMapper.mapToDto(createTestMovie());
+        MovieDto testDto = mapper.mapToDto(createTestMovie());
         assertThat(testDto.getId()).isEqualTo(1L);
         assertThat(testDto.getName()).isEqualTo("Test movie name");
         assertThat(testDto.getDirector()).isEqualTo("Test director");
@@ -22,7 +24,7 @@ public class MovieMapperUnitTest extends AbstractTestClass {
 
     @Test
     void mapToDtoListTest() {
-        List<MovieDto> testDto = MovieMapper.mapToDtoList(createTestMovies());
+        List<MovieDto> testDto = mapper.mapToDtoList(createTestMovies());
         assertThat(testDto)
                 .isNotNull()
                 .hasSize(2);

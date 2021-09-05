@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class ReviewMapper {
 
-    public static ReviewDto mapToDto(Review review) {
+    public ReviewDto mapToDto(Review review) {
         ReviewDto dto = new ReviewDto();
         dto.setId(review.getId());
         dto.setText(review.getText());
@@ -16,13 +16,13 @@ public class ReviewMapper {
         return dto;
     }
 
-    public static List<ReviewDto> mapToDtoList(List<Review> movies) {
+    public List<ReviewDto> mapToDtoList(List<Review> movies) {
         return movies.stream()
-                .map(ReviewMapper::mapToDto)
+                .map(this::mapToDto)
                 .collect(Collectors.toList());
     }
 
-    public static Review mapToReview(ReviewDto dto) {
+    public Review mapToReview(ReviewDto dto) {
         Review review = new Review();
         review.setMark(dto.getMark());
         review.setText(dto.getText());
